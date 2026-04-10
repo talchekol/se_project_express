@@ -5,9 +5,6 @@ The back-end project is focused on creating a server for the WTWR application. Y
 
 `npm run dev` — to launch the server with the hot reload feature
 
-### Testing
-Before committing your code, make sure you edit the file `sprint.txt` in the root folder. The file `sprint.txt` should contain the number of the sprint you're currently working on. For ex. 12
-
 # WTWR Back End
 
 ## Description
@@ -29,3 +26,6 @@ This project is the back-end server for the WTWR application. It provides an API
 - Error handling with status codes
 - Temporary authorization middleware
 - Like and dislike functionality for clothing items
+
+## link to video pitch
+- https://drive.google.com/file/d/1AeiE1k2y4H3S1eVnYPf-gzZbpzQcwKcf/view?usp=sharing
