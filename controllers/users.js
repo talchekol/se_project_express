@@ -1,20 +1,19 @@
 const bcrypt = require("bcryptjs");
-const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
+const User = require("../models/user");
 const { JWT_SECRET } = require("../utils/config");
 const {
   BAD_REQUEST,
   UNAUTHORIZED,
-  FORBIDDEN,
   NOT_FOUND,
   CONFLICT,
   DEFAULT_ERROR,
 } = require("../utils/errors");
-const validator = require("validator");
 
 const getUsers = (req, res) => {
   User.find({})
-    .then((users) => res.status(200).send(users))
+    .then((users) => res.send(users))
     .catch((err) => {
       console.error(err);
       res
@@ -28,7 +27,7 @@ const getCurrentUser = (req, res) => {
 
   User.findById(userId)
     .orFail()
-    .then((user) => res.status(200).send(user))
+    .then((user) => res.send(user))
     .catch((err) => {
       console.error(err);
 
@@ -60,13 +59,13 @@ const login = (req, res) => {
     });
   }
 
-  User.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
         expiresIn: "7d",
       });
 
-      res.send({ token });
+      return res.send({ token });
     })
     .catch((err) => {
       console.error(err);
@@ -98,7 +97,7 @@ const createUser = (req, res) => {
     });
   }
 
-  bcrypt
+  return bcrypt
     .hash(password, 10)
     .then((hash) =>
       User.create({
@@ -111,7 +110,7 @@ const createUser = (req, res) => {
     .then((user) => {
       const userObj = user.toObject();
       delete userObj.password;
-      res.status(201).send(userObj);
+      return res.status(201).send(userObj);
     })
     .catch((err) => {
       console.error(err);
