@@ -2,7 +2,14 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config");
-const { BAD_REQUEST, NOT_FOUND, DEFAULT_ERROR } = require("../utils/errors");
+const {
+  BAD_REQUEST,
+  UNAUTHORIZED,
+  FORBIDDEN,
+  NOT_FOUND,
+  CONFLICT,
+  DEFAULT_ERROR,
+} = require("../utils/errors");
 const validator = require("validator");
 
 const getUsers = (req, res) => {
@@ -41,8 +48,16 @@ const getCurrentUser = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !validator.isEmail(email)) {
-    return res.status(BAD_REQUEST).send({ message: "Invalid email format" });
+  if (!email || !password) {
+    return res.status(BAD_REQUEST).send({
+      message: "Email and password are required",
+    });
+  }
+
+  if (!validator.isEmail(email)) {
+    return res.status(BAD_REQUEST).send({
+      message: "Invalid email format",
+    });
   }
 
   User.findUserByCredentials(email, password)
@@ -55,12 +70,33 @@ const login = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      return res.status(401).send({ message: err.message });
+
+      if (err.message === "Incorrect email or password") {
+        return res.status(UNAUTHORIZED).send({
+          message: "Incorrect email or password",
+        });
+      }
+
+      return res.status(DEFAULT_ERROR).send({
+        message: "An error has occurred on the server.",
+      });
     });
 };
 
 const createUser = (req, res) => {
   const { name, avatar, email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(BAD_REQUEST).send({
+      message: "Email and password are required",
+    });
+  }
+
+  if (!validator.isEmail(email)) {
+    return res.status(BAD_REQUEST).send({
+      message: "Invalid email format",
+    });
+  }
 
   bcrypt
     .hash(password, 10)
@@ -82,7 +118,7 @@ const createUser = (req, res) => {
 
       if (err.code === 11000) {
         return res
-          .status(409)
+          .status(CONFLICT)
           .send({ message: "User with this email already exists" });
       }
 

@@ -1,6 +1,13 @@
 const ClothingItem = require("../models/clothingItem");
 
-const { BAD_REQUEST, NOT_FOUND, DEFAULT_ERROR } = require("../utils/errors");
+const {
+  BAD_REQUEST,
+  UNAUTHORIZED,
+  FORBIDDEN,
+  NOT_FOUND,
+  CONFLICT,
+  DEFAULT_ERROR,
+} = require("../utils/errors");
 
 const SERVER_ERROR_MESSAGE = "An error has occurred on the server.";
 
@@ -41,7 +48,7 @@ const deleteItem = (req, res) => {
     .orFail()
     .then((item) => {
       if (item.owner.toString() !== req.user._id) {
-        return res.status(403).send({ message: "Forbidden" });
+        return res.status(FORBIDDEN).send({ message: "Forbidden" });
       }
 
       return item.deleteOne().then(() => res.status(200).send(item));
