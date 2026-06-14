@@ -29,3 +29,9 @@ This project is the back-end server for the WTWR application. It provides an API
 
 ## link to video pitch
 - https://drive.google.com/file/d/1AeiE1k2y4H3S1eVnYPf-gzZbpzQcwKcf/view?usp=sharing
+
+
+## Deployment Information
+- **Frontend Live URL:** https://wtwr-tc.jumpingcrab.com
+- **Backend API Live URL:** https://api-wtwr-tc.jumpingcrab.com
+- **Frontend GitHub Repository:** [Link to se_project_react](https://github.com/talchekol/se_project_react)
