@@ -1,37 +1,41 @@
 # WTWR (What to Wear?): Back End
-The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
+
+This is the back-end repository for the WTWR (What to Wear) application. It provides a robust, production-ready RESTful API built to manage user authentication, clothing items, and weather-based suggestions, complete with request validation, automated logging, and centralized error handling.
+
 ## Running the Project
-`npm run start` — to launch the server 
 
-`npm run dev` — to launch the server with the hot reload feature
+- `npm run start` — to launch the server in production environment.
+- `npm run dev` — to launch the server with the hot reload feature (Nodemon) for development.
 
-# WTWR Back End
+## Tech Stack & Ecosystem
 
-## Description
-This project is the back-end server for the WTWR application. It provides an API for users and clothing items, connects to MongoDB, and includes validation and error handling.
+- **Runtime Environment:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB & Mongoose (ODM)
+- **Request Validation:** Celebrate & Joi
+- **Logging Architecture:** Winston & Express-Winston
+- **Security:** Bcryptjs (Password Hashing) & Jsonwebtoken (JWT Auth)
+- **Process Management:** PM2
+- **Web Server Configuration:** NGINX with Let's Encrypt SSL/TLS Encryption
 
-## Tech Stack
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- ESLint
-- Postman
+## Production Features
 
-## Features
-- REST API for users and clothing items
-- MongoDB database connection
-- Schema validation with Mongoose
-- URL validation using validator
-- Error handling with status codes
-- Temporary authorization middleware
-- Like and dislike functionality for clothing items
+- **Robust REST API:** Full CRUD operations for users and clothing items.
+- **Centralized Error Handling:** Unified middleware wrapper with specialized HTTP error classes protecting server internals from leakages (safe 500 error shielding).
+- **Automated Validation Middleware:** Pre-validation on all incoming endpoint payloads via `celebrate` to guarantee clean data input before hitting DB models.
+- **Winston Request & Error Logging:** Automatic recording of all application layer traffic to local files (`request.log` and `error.log`) for advanced debugging and production audit.
+- **Real-time Crash Recovery:** Native integration of a `/crash-test` route simulating extreme runtime panic, handled seamlessly by a PM2 continuous process daemon.
 
-## link to video pitch
-- https://drive.google.com/file/d/1AeiE1k2y4H3S1eVnYPf-gzZbpzQcwKcf/view?usp=sharing
+---
 
+## Deployment & Links
 
-## Deployment Information
-- **Frontend Live URL:** https://wtwr-tc.jumpingcrab.com
-- **Backend API Live URL:** https://api-wtwr-tc.jumpingcrab.com
-- **Frontend GitHub Repository:** [Link to se_project_react](https://github.com/talchekol/se_project_react)
+- **Frontend Live URL:** [https://wtwr-tc.jumpingcrab.com](https://wtwr-tc.jumpingcrab.com)
+- **Backend API Live URL:** [https://api-wtwr-tc.jumpingcrab.com](https://api-wtwr-tc.jumpingcrab.com)
+- **Frontend GitHub Repository:** [https://github.com/talchekol/se_project_react](https://github.com/talchekol/se_project_react)
+
+## Project Pitch Video
+
+Watch the walkthrough, presentation, and design breakdown of the system layout:
+[TalChekol-ProjectPitch-WTWR](https://drive.google.com/file/d/1AeiE1k2y4H3S1eVnYPf-gzZbpzQcwKcf/view?usp=sharing)
+[TalChekol-ProjectPitch-WTWR](https://drive.google.com/file/d/1AeiE1k2y4H3S1eVnYPf-gzZbpzQcwKcf/view?usp=sharing)
