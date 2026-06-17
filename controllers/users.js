@@ -4,17 +4,9 @@ const validator = require("validator");
 const User = require("../models/user");
 const { JWT_SECRET } = require("../utils/config");
 const BadRequestError = require("../errors/bad-request-error");
-const ForbiddenError = require("../errors/forbidden-error");
 const NotFoundError = require("../errors/not-found-error");
 const ConflictError = require("../errors/conflict-error");
-
-const {
-  BAD_REQUEST,
-  UNAUTHORIZED,
-  NOT_FOUND,
-  CONFLICT,
-  DEFAULT_ERROR,
-} = require("../utils/errors");
+const UnauthorizedError = require("../errors/unauthorized-error");
 
 const getUsers = (req, res, next) => {
   User.find({})

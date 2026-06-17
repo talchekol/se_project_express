@@ -3,15 +3,6 @@ const BadRequestError = require("../errors/bad-request-error");
 const ForbiddenError = require("../errors/forbidden-error");
 const NotFoundError = require("../errors/not-found-error");
 
-const {
-  BAD_REQUEST,
-  FORBIDDEN,
-  NOT_FOUND,
-  DEFAULT_ERROR,
-} = require("../utils/errors");
-
-const SERVER_ERROR_MESSAGE = "An error has occurred on the server.";
-
 const getItems = (req, res, next) => {
   ClothingItem.find({})
     .then((items) => res.send(items))
@@ -51,7 +42,7 @@ const deleteItem = (req, res, next) => {
         );
       }
 
-      return item.deleteOne().then(() => res.status(200).send(item));
+      return item.deleteOne().then(() => res.send(item));
     })
     .catch((err) => {
       if (err.name === "CastError") {

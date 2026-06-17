@@ -31,7 +31,7 @@ This is the back-end repository for the WTWR (What to Wear) application. It prov
 ## Deployment & Links
 
 - **Frontend Live URL:** [https://wtwr-tc.jumpingcrab.com](https://wtwr-tc.jumpingcrab.com)
-- **Backend API Live URL:** [https://api-wtwr-tc.jumpingcrab.com](https://api-wtwr-tc.jumpingcrab.com)
+- **Backend API Live URL:** [https://api.wtwr-tc.jumpingcrab.com](https://api-wtwr-tc.jumpingcrab.com)
 - **Frontend GitHub Repository:** [https://github.com/talchekol/se_project_react](https://github.com/talchekol/se_project_react)
 
 ## Project Pitch Video
